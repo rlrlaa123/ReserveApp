@@ -15,7 +15,7 @@ class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     inquire = models.ForeignKey('Inquire', models.DO_NOTHING)
     user_id = models.CharField(max_length=45)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now)
     comment = models.CharField(max_length=100)
 
     class Meta:

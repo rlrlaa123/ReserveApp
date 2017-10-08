@@ -63,9 +63,50 @@ class InquireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inquire
         fields = (
-            'idinquire',
+            'inquire_id',
             # 'date',
             'user_id',
             'title',
             'content',
+        )
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = (
+            'inquire',
+            'user_id',
+            # 'date',
+            'comment',
+        )
+
+class InquireDetailSerializer(serializers.ModelSerializer):
+    # comment = CommentSerializer(read_only=True, many=True)
+    comment_user_id = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='user_id'
+    )
+    comment = serializers.SlugRelatedField(
+        many= True,
+        read_only=True,
+        slug_field='comment'
+    )
+    comment_date = serializers.SlugRelatedField(
+        many= True,
+        read_only=True,
+        slug_field='date'
+    )
+
+    class Meta:
+        model = Inquire
+        fields = (
+            'inquire_id',
+            'date',
+            'user_id',
+            'title',
+            'content',
+            'comment',
+            'comment_user_id',
+            'comment_date',
         )

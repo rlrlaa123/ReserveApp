@@ -4,12 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from serializers import *
 from models import *
-from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import Http404
-
 from rest_framework import permissions
 from permissions import IsOwnerOrReadOnly
 
@@ -27,10 +24,12 @@ class LoginList(APIView):
         try:
             User.objects.get(user_id=user_id,password=password)
             return Response("Ok", status=status.HTTP_200_OK)
-        except User.DoesNotExist:
+        except status.HTTP_400_BAD_REQUEST:
             return Response("No", status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
+        User.objects.get(user_id=request.GET['user_id'],password=request.GET['password'])
+        return Response("Ok")
         return self.get_object(request.GET['user_id'],request.GET['password'])
 
 class ValidationList(APIView):
@@ -51,6 +50,10 @@ class NoticeList(APIView):
         return Response(serializer.data)
 
 class ReservationList(APIView):
+    def get(self, request, format=None):
+        reservation = Reservation.objects.all()
+        serializer = LookupSerializer(reservation,many=True)
+        return Response(serializer.data)
     def post(self, request, format=None):
         serializer = ReservationSerializer(data=request.data)
         if serializer.is_valid():
@@ -58,22 +61,29 @@ class ReservationList(APIView):
             return Response("Ok",status=status.HTTP_200_OK)
         return Response('No',status=status.HTTP_400_BAD_REQUEST)
 
-class LookupList(APIView):
-    def get(self, request, format=None):
-        reservation = Reservation.objects.all()
-        serializer = LookupSerializer(reservation,many=True)
-        return Response(serializer.data)
-
 class InquireList(APIView):
+    def get(self, request, format=None):
+        inquire = Inquire.objects.all()
+        serializer = InquireSerializer(inquire,many=True)
+        return Response(serializer.data)
     def post(self, request, format=None):
         serializer = InquireSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response("Ok",status=status.HTTP_200_OK)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response("No",status=status.HTTP_400_BAD_REQUEST)
 
-class InquireLookupList(APIView):
-    def get(self, request, format=None):
-        inquire = Inquire.objects.all()
-        serializer = InquireSerializer(inquire,many=True)
+class CommentList(APIView):
+    def post(self, request, pk, fomrat=None):
+        print request.data
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("OK",status=status.HTTP_200_OK)
+        return Response("No",status=status.HTTP_400_BAD_REQUEST)
+
+class InquireDetailList(APIView):
+    def get(self, request, pk, format=None):
+        inquire = Inquire.objects.get(pk=pk)
+        serializer = InquireDetailSerializer(inquire)
         return Response(serializer.data)

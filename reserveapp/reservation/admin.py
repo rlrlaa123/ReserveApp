@@ -20,8 +20,12 @@ class ReservationAdmin(admin.ModelAdmin):
 class InquireAdmin(admin.ModelAdmin):
     list_display = ('inquire_id','date','user_id','title','content')
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user_id','date','comment')
+
 # 클래스를 어드민 사이트에 등록한다.
 admin.site.register(User, UserAdmin)
 admin.site.register(Notice, NoticeAdmin)
 admin.site.register(Reservation, ReservationAdmin)
 admin.site.register(Inquire, InquireAdmin)
+admin.site.register(Comment, CommentAdmin)
