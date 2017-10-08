@@ -58,7 +58,6 @@ class ReservationList(APIView):
     def get(self, request, format=None):
         reservation = Reservation.objects.all()
         serializer = ReservationSerializer(reservation,many=True)
-        print serializer.data
         return Response(serializer.data)
 
     def post(self, request, format=None):
