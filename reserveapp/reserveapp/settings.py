@@ -54,6 +54,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+}
+
 ROOT_URLCONF = 'reserveapp.urls'
 
 TEMPLATES = [
@@ -84,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
         'USER': 'root',
-        'PASSWORD': 'ehehdd009~!'
+        'PASSWORD': 'Forif0228'
     }
 }
 

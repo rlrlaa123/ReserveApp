@@ -10,6 +10,9 @@ from .models import *
 # 출력할 ResourceAdmin 클래스를 만든다
 class UserAdmin(admin.ModelAdmin):
   list_display = ('user_id', 'password','name','phone','email','major','student_id')
+class NoticeAdmin(admin.ModelAdmin):
+  list_display = ('date','title','content')
 
 # 클래스를 어드민 사이트에 등록한다.
 admin.site.register(User, UserAdmin)
+admin.site.register(Notice, NoticeAdmin)

@@ -138,7 +138,7 @@ class Inquire(models.Model):
 class Notice(models.Model):
     idnotice = models.AutoField(primary_key=True)
     date = models.DateTimeField()
-    user_id = models.CharField(max_length=45)
+    user_id = models.CharField(max_length=45,default='admin')
     title = models.CharField(max_length=45)
     content = models.CharField(max_length=45)
 

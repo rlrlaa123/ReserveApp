@@ -22,3 +22,12 @@ class LoginSerializer(serializers.ModelSerializer):
             'user_id',
             'password',
         )
+
+class NoticeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notice
+        fields = (
+            'date',
+            'title',
+            'content',
+        )
