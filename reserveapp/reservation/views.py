@@ -76,7 +76,7 @@ class ReservationList(APIView):
         return Response("No",status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
-        reservation = self.get_object(request.data['reservation_id'])
+        reservation = self.get_object(request.query_params['reservation_id'])
         reservation.delete()
         return Response("Ok")
 
@@ -108,7 +108,7 @@ class InquireList(APIView):
         return Response("No",status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
-        inquire = self.get_object(request.data['inquire_id'])
+        inquire = self.get_object(request.query_params['inquire_id'])
         inquire.delete()
         return Response("Ok")
 
@@ -146,10 +146,19 @@ class CommentList(APIView):
         return Response("Ok")
 
 class CheckList(APIView):
-    def get_object(self, pk):
+    def get_object(self, user_id):
         try:
-            return Reservation.objects.get(pk=pk)
+            return Reservation.objects.get(user_id=user_id)
         except Reservation.DoesNotExist:
             return -1
 
-    # def get(self, request):
+    def get(self, request):
+        reservation = self.get_object(request.GET['user_id'])
+        if reservation == -1:
+            return Response("Ok",status=status.HTTP_200_OK)
+        else:
+            serializer = ReservationSerializer(reservation,many=True)
+            if serializer.is_valid():
+                print serializer.data
+                return Response(serializer.data)
+            return Response(serializer.errors)
