@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^notice/$', views.NoticeList.as_view()),
     url(r'^reservation/$', views.ReservationList.as_view()),
     url(r'^reservation/lookup/$', views.LookupList.as_view()),
+    url(r'^inquire/$', views.InquireList.as_view()),
+    url(r'^inquire/lookup/$', views.InquireLookupList.as_view()),
 ]
 # r'^blog/page(?P<num>[0-9]+)/$'
 urlpatterns = format_suffix_patterns(urlpatterns)

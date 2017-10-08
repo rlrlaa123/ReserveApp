@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -10,7 +9,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from datetime import datetime
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
@@ -78,6 +77,18 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
+class Comment(models.Model):
+    comment_id = models.AutoField(primary_key=True)
+    inquire = models.ForeignKey('Inquire', models.DO_NOTHING)
+    user_id = models.CharField(max_length=45)
+    date = models.DateTimeField()
+    comment = models.CharField(max_length=45)
+
+    class Meta:
+        managed = False
+        db_table = 'comment'
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -123,14 +134,11 @@ class DjangoSession(models.Model):
 
 
 class Inquire(models.Model):
-    idinquire = models.AutoField(primary_key=True)
-    date = models.DateTimeField()
+    inquire_id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=datetime.now)
     user_id = models.CharField(max_length=45)
     title = models.CharField(max_length=45)
-    content = models.CharField(max_length=45)
-    comment_user_id = models.CharField(max_length=45, blank=True, null=True)
-    comment_date = models.CharField(max_length=45, blank=True, null=True)
-    comment_content = models.CharField(max_length=45, blank=True, null=True)
+    content = models.CharField(max_length=100)
 
     class Meta:
         managed = False
@@ -138,7 +146,7 @@ class Inquire(models.Model):
 
 
 class Notice(models.Model):
-    idnotice = models.AutoField(primary_key=True)
+    notice_id = models.AutoField(primary_key=True)
     date = models.DateTimeField()
     user_id = models.CharField(max_length=45,default='admin')
     title = models.CharField(max_length=45)
@@ -150,7 +158,7 @@ class Notice(models.Model):
 
 
 class Reservation(models.Model):
-    idreservation = models.AutoField(primary_key=True)
+    reservation_id = models.AutoField(primary_key=True)
     user_id = models.CharField(max_length=45)
     name = models.CharField(max_length=45)
     date = models.DateField()
@@ -158,7 +166,7 @@ class Reservation(models.Model):
     classroom = models.CharField(max_length=45)
     state = models.IntegerField(default=2,choices=((1,'미신청'),(2,'보류'),(3,'허가'),(4,'거부')))
     day = models.CharField(max_length=45)
-    purpose = models.CharField(max_length=100)
+    purpose = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False

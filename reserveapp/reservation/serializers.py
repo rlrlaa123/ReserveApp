@@ -58,3 +58,14 @@ class LookupSerializer(serializers.ModelSerializer):
             'purpose',
             'state',
         )
+
+class InquireSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inquire
+        fields = (
+            'idinquire',
+            # 'date',
+            'user_id',
+            'title',
+            'content',
+        )
