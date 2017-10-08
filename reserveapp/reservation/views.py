@@ -141,7 +141,7 @@ class CommentList(APIView):
         return Response("No",status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        comment = self.get_object(request.data['comment_id'])
+        comment = self.get_object(request.query_params['comment_id'])
         comment.delete()
         return Response("Ok")
 
@@ -151,7 +151,6 @@ class CheckList(APIView):
 
     def get(self, request):
         reservation = self.filter_object(request.GET['user_id'])
-        print reservation
         if reservation.count() == 0:
             return Response("Ok")
         else:
