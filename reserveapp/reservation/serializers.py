@@ -76,28 +76,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = (
             'inquire',
             'user_id',
-            # 'date',
+            'date',
             'comment',
         )
 
 class InquireDetailSerializer(serializers.ModelSerializer):
-    # comment = CommentSerializer(read_only=True, many=True)
-    comment_user_id = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='user_id'
-    )
-    comment = serializers.SlugRelatedField(
-        many= True,
-        read_only=True,
-        slug_field='comment'
-    )
-    comment_date = serializers.SlugRelatedField(
-        many= True,
-        read_only=True,
-        slug_field='date'
-    )
-
+    comment = CommentSerializer(many=True,read_only=True)
     class Meta:
         model = Inquire
         fields = (
@@ -107,6 +91,4 @@ class InquireDetailSerializer(serializers.ModelSerializer):
             'title',
             'content',
             'comment',
-            'comment_user_id',
-            'comment_date',
         )

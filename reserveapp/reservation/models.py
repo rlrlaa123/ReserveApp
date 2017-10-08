@@ -13,7 +13,7 @@ from datetime import datetime
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    inquire = models.ForeignKey('Inquire', models.DO_NOTHING)
+    inquire = models.ForeignKey('Inquire', models.DO_NOTHING, related_name='comment')
     user_id = models.CharField(max_length=45)
     date = models.DateTimeField(default=datetime.now)
     comment = models.CharField(max_length=100)
@@ -21,6 +21,10 @@ class Comment(models.Model):
     class Meta:
         managed = False
         db_table = 'comment'
+
+    # def __unicode__(self):
+    #     return [self.user_id,self.comment,self.date]
+    #     # '[%s,%s,%s]' % (self.user_id, self.comment, self.date)
 
 
 class Inquire(models.Model):

@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
         'USER': 'root',
-        'PASSWORD': 'ehehdd009~!',
+        'PASSWORD': 'Forif0228',
     }
 }
 DATABASE_OPTIONS = {'charset': 'utf8'}
