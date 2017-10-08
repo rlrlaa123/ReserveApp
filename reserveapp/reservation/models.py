@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -149,12 +151,14 @@ class Notice(models.Model):
 
 class Reservation(models.Model):
     idreservation = models.AutoField(primary_key=True)
-    date = models.DateTimeField()
+    user_id = models.CharField(max_length=45)
+    name = models.CharField(max_length=45)
+    date = models.DateField()
     period = models.CharField(max_length=45)
     classroom = models.CharField(max_length=45)
-    state = models.CharField(max_length=45)
-    user_id = models.CharField(max_length=45)
+    state = models.IntegerField(default=2,choices=((1,'미신청'),(2,'보류'),(3,'허가'),(4,'거부')))
     day = models.CharField(max_length=45)
+    purpose = models.CharField(max_length=100)
 
     class Meta:
         managed = False
