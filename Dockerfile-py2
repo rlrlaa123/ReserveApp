@@ -54,5 +54,5 @@ COPY . /home/docker/code/
 # RUN django-admin.py startproject website /home/docker/code/app/
 RUN python /home/docker/code/app/manage.py collectstatic --noinput
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["supervisord", "-n"]
