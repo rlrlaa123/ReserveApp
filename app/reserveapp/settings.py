@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@i06pi%yy$vay8_yh^tox2u)ew27hrv((u)gd6n^$z+qcdbabd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
         'USER': 'root',
-        'PASSWORD': 'ehehdd009~!',
+        'PASSWORD': 'Forif0228',
     }
 }
 # Password validation
