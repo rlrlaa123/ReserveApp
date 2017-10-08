@@ -57,7 +57,8 @@ class ReservationList(APIView):
 
     def get(self, request, format=None):
         reservation = Reservation.objects.all()
-        serializer = LookupSerializer(reservation,many=True)
+        serializer = ReservationSerializer(reservation,many=True)
+        print serializer.data
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -144,3 +145,12 @@ class CommentList(APIView):
         comment = self.get_object(request.data['comment_id'])
         comment.delete()
         return Response("Ok")
+
+class CheckList(APIView):
+    def get_object(self, pk):
+        try:
+            return Reservation.objects.get(pk=pk)
+        except Reservation.DoesNotExist:
+            return -1
+
+    # def get(self, request):

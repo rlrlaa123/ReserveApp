@@ -14,7 +14,7 @@ from datetime import datetime
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     inquire = models.ForeignKey('Inquire', models.DO_NOTHING, related_name='comment')
-    user_id = models.CharField(max_length=45)
+    user_id = models.CharField(max_length=45,default='관리자')
     date = models.DateTimeField(default=datetime.now)
     comment = models.CharField(max_length=100)
 
@@ -25,7 +25,8 @@ class Comment(models.Model):
         verbose_name_plural = '문의 사항 댓글'
     # def __unicode__(self):
     #     return [self.user_id,self.comment,self.date]
-    #     # '[%s,%s,%s]' % (self.user_id, self.comment, self.date)
+    #
+        #  '[%s,%s,%s]' % (self.user_id, self.comment, self.date)
 
 
 class Inquire(models.Model):
@@ -45,7 +46,7 @@ class Inquire(models.Model):
 class Notice(models.Model):
     notice_id = models.AutoField(primary_key=True)
     date = models.DateTimeField()
-    user_id = models.CharField(max_length=45,default='admin')
+    user_id = models.CharField(max_length=45,default='관리자')
     title = models.CharField(max_length=45)
     content = models.CharField(max_length=45)
 

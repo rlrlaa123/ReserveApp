@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^inquire/$', views.InquireList.as_view()),
     url(r'^inquire/(?P<pk>[0-9]+)/comment/$', views.CommentList.as_view()),
     url(r'^inquire/(?P<pk>[0-9]+)/$', views.InquireDetailList.as_view()),
+    url(r'^check/$', views.CheckList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

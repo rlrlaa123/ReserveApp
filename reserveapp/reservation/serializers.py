@@ -44,28 +44,30 @@ class ReservationSerializer(serializers.ModelSerializer):
             'day',
             'name',
             'purpose',
-        )
-
-class LookupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Reservation
-        fields = (
-            'date',
-            'period',
-            'classroom',
-            'user_id',
-            'day',
-            'name',
-            'purpose',
             'state',
         )
+
+# class LookupSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Reservation
+#         fields = (
+#             'reservation_id',
+#             'date',
+#             'period',
+#             'classroom',
+#             'user_id',
+#             'day',
+#             'name',
+#             'purpose',
+#             'state',
+#         )
 
 class InquireSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inquire
         fields = (
             'inquire_id',
-            # 'date',
+            'date',
             'user_id',
             'title',
             'content',
