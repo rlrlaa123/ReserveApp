@@ -146,19 +146,14 @@ class CommentList(APIView):
         return Response("Ok")
 
 class CheckList(APIView):
-    def get_object(self, user_id):
-        try:
-            return Reservation.objects.get(user_id=user_id)
-        except Reservation.DoesNotExist:
-            return -1
+    def filter_object(self, user_id):
+        return Reservation.objects.filter(user_id=user_id,state__in=[3,4])
 
     def get(self, request):
-        reservation = self.get_object(request.GET['user_id'])
-        if reservation == -1:
-            return Response("Ok",status=status.HTTP_200_OK)
+        reservation = self.filter_object(request.GET['user_id'])
+        print reservation
+        if reservation.count() == 0:
+            return Response("Ok")
         else:
             serializer = ReservationSerializer(reservation,many=True)
-            if serializer.is_valid():
-                print serializer.data
-                return Response(serializer.data)
-            return Response(serializer.errors)
+            return Response(serializer.data)

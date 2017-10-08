@@ -21,7 +21,12 @@ class InquireAdmin(admin.ModelAdmin):
     list_display = ('inquire_id','date','user_id','title','content')
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('comment_id','user_id','date','comment')
+    list_display = ('inquire_view','comment_id','user_id','date','comment')
+
+    def inquire_view(self, obj):
+        return obj.inquire.inquire_id
+
+    raw_id_fields = ('inquire',)
 
 # 클래스를 어드민 사이트에 등록한다.
 admin.site.register(User, UserAdmin)
