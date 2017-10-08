@@ -15,7 +15,7 @@ class NoticeAdmin(admin.ModelAdmin):
   list_display = ('date','title','content')
 
 class ReservationAdmin(admin.ModelAdmin):
-  list_display = ('reservation_id','user_id','name','date','period','classroom','state','day','purpose')
+  list_display = ('reservation_id','user_id','name','date','period','classroom','state','day','purpose','reject')
 
 class InquireAdmin(admin.ModelAdmin):
     list_display = ('inquire_id','date','user_id','title','content')

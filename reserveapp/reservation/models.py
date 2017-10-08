@@ -67,6 +67,7 @@ class Reservation(models.Model):
     state = models.IntegerField(default=2,choices=((1,'미신청'),(2,'보류'),(3,'허가'),(4,'거부')))
     day = models.CharField(max_length=45)
     purpose = models.CharField(max_length=100, blank=True, null=True)
+    reject = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False

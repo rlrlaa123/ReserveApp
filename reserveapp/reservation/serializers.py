@@ -45,6 +45,7 @@ class ReservationSerializer(serializers.ModelSerializer):
             'name',
             'purpose',
             'state',
+            'reject',
         )
 
 # class LookupSerializer(serializers.ModelSerializer):
