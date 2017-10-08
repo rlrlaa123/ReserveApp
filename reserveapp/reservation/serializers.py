@@ -31,3 +31,29 @@ class NoticeSerializer(serializers.ModelSerializer):
             'title',
             'content',
         )
+
+class ReservationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reservation
+        fields = (
+            'date',
+            'period',
+            'classroom',
+            'user_id',
+            'day',
+            'name',
+            'purpose',
+        )
+
+class LookupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reservation
+        fields = (
+            'date',
+            'period',
+            'classroom',
+            'user_id',
+            'day',
+            'name',
+            'purpose',
+        )

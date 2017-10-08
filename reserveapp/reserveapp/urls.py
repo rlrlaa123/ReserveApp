@@ -21,10 +21,12 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^signup', views.SignupList.as_view()),
+    url(r'^signup/$', views.SignupList.as_view()),
     url(r'^login/$', views.LoginList.as_view(),name='login'),
     url(r'^validation/$', views.ValidationList.as_view(),name='validation'),
-    url(r'^notice', views.NoticeList.as_view()),
+    url(r'^notice/$', views.NoticeList.as_view()),
+    url(r'^reservation/$', views.ReservationList.as_view()),
+    url(r'^reservation/lookup/$', views.LookupList.as_view()),
 ]
 # r'^blog/page(?P<num>[0-9]+)/$'
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -45,13 +45,21 @@ class ValidationList(APIView):
         return self.get_object(request.GET['user_id'])
 
 class NoticeList(APIView):
-
     def get(self,request,format=None):
         user = Notice.objects.all()
         serializer = NoticeSerializer(user,many=True)
         return Response(serializer.data)
-# class LoginList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = LoginSerializer
-#     filter_backends = (filters.SearchFilter,)
-#     search_fields = ('=username', '=password')
+
+class ReservationList(APIView):
+    def post(self, request, format=None):
+        serializer = ReservationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("Ok",status=status.HTTP_200_OK)
+        return Response('No',status=status.HTTP_400_BAD_REQUEST)
+
+class LookupList(APIView):
+    def get(self, request, format=None):
+        reservation = Reservation.objects.all()
+        serializer = LookupSerializer(reservation,many=True)
+        return Response(serializer.data)
