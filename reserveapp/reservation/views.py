@@ -81,10 +81,17 @@ class ReservationList(APIView):
         return Response("Ok")
 
 class InquireList(APIView):
+    def get_object(self,pk):
+        try:
+            return Inquire.objects.get(pk=pk)
+        except Inquire.DoesNotExist:
+            raise Http404
+
     def get(self, request, format=None):
         inquire = Inquire.objects.all()
         serializer = InquireSerializer(inquire,many=True)
         return Response(serializer.data)
+
     def post(self, request, format=None):
         serializer = InquireSerializer(data=request.data)
         if serializer.is_valid():
@@ -92,17 +99,48 @@ class InquireList(APIView):
             return Response("Ok",status=status.HTTP_200_OK)
         return Response("No",status=status.HTTP_400_BAD_REQUEST)
 
-class CommentList(APIView):
-    def post(self, request, pk, fomrat=None):
-        print request.data
-        serializer = CommentSerializer(data=request.data)
+    def put(self, request, format=None):
+        inquire = self.get_object(request.data['inquire_id'])
+        serializer = InquireSerializer(inquire, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response("OK",status=status.HTTP_200_OK)
+            return Response("Ok",status=status.HTTP_200_OK)
         return Response("No",status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, format=None):
+        inquire = self.get_object(request.data['inquire_id'])
+        inquire.delete()
+        return Response("Ok")
 
 class InquireDetailList(APIView):
     def get(self, request, pk, format=None):
         inquire = Inquire.objects.get(pk=pk)
         serializer = InquireDetailSerializer(inquire)
         return Response(serializer.data)
+
+class CommentList(APIView):
+    def get_object(self, pk):
+        try:
+            return Comment.objects.get(pk=pk)
+        except Comment.DoesNotExist:
+            raise Http404
+
+    def post(self, request, pk, fomrat=None):
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("OK",status=status.HTTP_200_OK)
+        return Response("No",status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk, format=None):
+        comment = self.get_object(request.data['comment_id'])
+        serializer = CommentSerializer(comment, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("Ok",status=status.HTTP_200_OK)
+        return Response("No",status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        comment = self.get_object(request.data['comment_id'])
+        comment.delete()
+        return Response("Ok")

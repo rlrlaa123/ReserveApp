@@ -79,10 +79,12 @@ class CommentSerializer(serializers.ModelSerializer):
             'user_id',
             'date',
             'comment',
+            'comment_id',
         )
 
 class InquireDetailSerializer(serializers.ModelSerializer):
     comment = CommentSerializer(many=True,read_only=True)
+
     class Meta:
         model = Inquire
         fields = (
