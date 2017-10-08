@@ -56,4 +56,5 @@ class LookupSerializer(serializers.ModelSerializer):
             'day',
             'name',
             'purpose',
+            'state',
         )
