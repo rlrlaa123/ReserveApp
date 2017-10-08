@@ -21,7 +21,8 @@ class Comment(models.Model):
     class Meta:
         managed = False
         db_table = 'comment'
-
+        verbose_name = '문의사항 댓글 관리'
+        verbose_name_plural = '문의 사항 댓글'
     # def __unicode__(self):
     #     return [self.user_id,self.comment,self.date]
     #     # '[%s,%s,%s]' % (self.user_id, self.comment, self.date)
@@ -37,6 +38,8 @@ class Inquire(models.Model):
     class Meta:
         managed = False
         db_table = 'inquire'
+        verbose_name = '문의사항'
+        verbose_name_plural = '문의사항'
 
 
 class Notice(models.Model):
@@ -49,6 +52,8 @@ class Notice(models.Model):
     class Meta:
         managed = False
         db_table = 'notice'
+        verbose_name = '공지'
+        verbose_name_plural = '공지'
 
 
 class Reservation(models.Model):
@@ -65,6 +70,8 @@ class Reservation(models.Model):
     class Meta:
         managed = False
         db_table = 'reservation'
+        verbose_name = '강의실 대여'
+        verbose_name_plural = '강의실 대여'
 
 
 class User(models.Model):
@@ -79,3 +86,5 @@ class User(models.Model):
     class Meta:
         managed = False
         db_table = 'user'
+        verbose_name = '유저 관리'
+        verbose_name_plural = '유저 관리'

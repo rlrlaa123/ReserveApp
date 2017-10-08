@@ -36,6 +36,7 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = (
+            'reservation_id',
             'date',
             'period',
             'classroom',
