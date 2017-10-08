@@ -25,14 +25,13 @@ class SignupList(APIView):
 class LoginList(APIView):
     def get_object(self, user_id, password):
         try:
-            return User.objects.get(user_id=user_id,password=password)
+            User.objects.get(user_id=user_id,password=password)
+            return Response("Ok", status=status.HTTP_200_OK)
         except User.DoesNotExist:
-            return
+            return Response("No", status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
-        self.get_object(request.GET['user_id'],request.GET['password'])
-
-        return Response("Ok", status=status.HTTP_200_OK)
+        return self.get_object(request.GET['user_id'],request.GET['password'])
 
 class ValidationList(APIView):
     def get_object(self, user_id):
