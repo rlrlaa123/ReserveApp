@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'reservation',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '222.239.250.218',
+        'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'Forif0228',
     }

@@ -34,7 +34,7 @@ class Inquire(models.Model):
     date = models.DateTimeField(default=datetime.now, verbose_name='날짜')
     user_id = models.CharField(max_length=45, verbose_name='글쓴이')
     title = models.CharField(max_length=45, verbose_name='제목')
-    content = models.CharField(max_length=45, verbose_name='내용')
+    content = models.CharField(max_length=500, verbose_name='내용')
 
     class Meta:
         managed = False
@@ -48,7 +48,7 @@ class Notice(models.Model):
     date = models.DateTimeField(verbose_name='날짜')
     user_id = models.CharField(max_length=45, default='관리자', verbose_name='글쓴이')
     title = models.CharField(max_length=45, verbose_name='제목')
-    content = models.TextField(max_length=45, verbose_name='내용')
+    content = models.TextField(max_length=500, verbose_name='내용')
 
     class Meta:
         managed = False
@@ -66,8 +66,8 @@ class Reservation(models.Model):
     classroom = models.CharField(max_length=45, verbose_name='강의실')
     state = models.IntegerField(default=2,choices=((1,'미신청'),(2,'보류'),(3,'허가'),(4,'거부')), verbose_name='예약상태')
     day = models.CharField(max_length=45, verbose_name='요일')
-    purpose = models.TextField(max_length=100, blank=True, null=True, verbose_name='사용목적')
-    reject = models.TextField(max_length=100, blank=True, null=True, verbose_name='거부이유')
+    purpose = models.TextField(max_length=500, blank=True, null=True, verbose_name='사용목적')
+    reject = models.TextField(max_length=500, blank=True, null=True, verbose_name='거부이유')
 
     class Meta:
         managed = False
